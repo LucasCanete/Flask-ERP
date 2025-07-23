@@ -1,0 +1,72 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<h2 class="text-center mb-4">Historial de Servicios</h2>
+
+<form id="filtro-form" class="mb-4 d-flex justify-content-center">
+    <select name="periodo" id="periodo" class="form-select w-auto me-2">
+        <option value="semana">Última semana</option>
+        <option value="mes">Último mes</option>
+        <option value="anio">Último año</option>
+    </select>
+    <button type="submit" class="btn btn-primary">Actualizar</button>
+</form>
+
+<canvas id="historialChart" height="100"></canvas>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+    async function cargarGrafico(periodo = 'semana') {
+        const res = await fetch(`/api/history_data?periodo=${periodo}`);
+        const data = await res.json();
+
+        const ctx = document.getElementById('historialChart').getContext('2d');
+        if (window.myChart) {
+            window.myChart.destroy();
+        }
+
+        window.myChart = new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: data.labels,
+                datasets: [{
+                    label: 'Servicios realizados',
+                    data: data.data,
+                    backgroundColor: '#0d6efd',
+                    borderRadius: 5
+                }]
+            },
+            options: {
+                responsive: true,
+                plugins: {
+                    legend: { display: false },
+                    tooltip: {
+                        callbacks: {
+                            label: ctx => `${ctx.raw} servicios`
+                        }
+                    }
+                },
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        title: { display: true, text: 'Cantidad' }
+                    },
+                    x: {
+                        title: { display: true, text: 'Fecha' }
+                    }
+                }
+            }
+        });
+    }
+
+    document.getElementById('filtro-form').addEventListener('submit', function (e) {
+        e.preventDefault();
+        const periodo = document.getElementById('periodo').value;
+        cargarGrafico(periodo);
+    });
+
+    // Cargar gráfico al iniciar
+    cargarGrafico();
+</script>
+
+{% endblock %}

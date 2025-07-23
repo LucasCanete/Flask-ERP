@@ -1,0 +1,92 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<h2 class="text-center mb-4">Servicios Registrados</h2>
+
+<form method="get" class="mb-3 d-flex justify-content-between">
+    <div class="form-group me-2">
+        <select name="status" class="form-select">
+            <option value="">Todos los estados</option>
+            <option value="En proceso">En proceso</option>
+            <option value="Completado">Completado</option>
+            <option value="Cancelado">Cancelado</option>
+        </select>
+    </div>
+
+    <button type="submit" class="btn btn-outline-primary">Filtrar</button>
+</form>
+
+{% for day, services_by_day in grouped_services %}
+    <h4 class="mt-5 mb-3 text-primary border-bottom pb-1">{{ day }}</h4>
+    <table class="table table-hover bg-white shadow-sm rounded">
+        <thead class="table-light">
+            <tr>
+                <th>Hora</th>
+                <th>Tipo</th>
+                <th>Cliente</th>
+                <th>Dirección</th>
+                <th>Teléfono</th>
+                <th>Estado</th>
+                <th>Acción</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for service in services_by_day %}
+            <tr id="row-{{ service.id }}">
+                <td>{{ service.datetime.strftime('%H:%M') }}</td>
+                <td>{{ service.type }}</td>
+                <td>{{ service.client_name }}</td>
+                <td>{{ service.client_address }}</td>
+                <td>{{ service.client_phone }}</td>
+                <td>
+                    <div class="d-flex align-items-center">
+                        <span class="status-dot me-2" id="dot-{{ service.id }}"
+                            style="height: 10px; width: 10px; border-radius: 50%; display: inline-block;
+                            background-color: {% if service.status == 'En proceso' %}#ffc107{% elif service.status == 'Completado' %}#28a745{% else %}#dc3545{% endif %};">
+                        </span>
+                        <select class="form-select form-select-sm w-auto status-select" data-id="{{ service.id }}">
+                            <option {% if service.status == 'En proceso' %}selected{% endif %}>En proceso</option>
+                            <option {% if service.status == 'Completado' %}selected{% endif %}>Completado</option>
+                            <option {% if service.status == 'Cancelado' %}selected{% endif %}>Cancelado</option>
+                        </select>
+                    </div>
+                </td>
+                <td><a href="{{ url_for('edit_service_page', id=service.id) }}" class="btn btn-sm btn-primary">Editar</a></td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% endfor %}
+
+<script>
+    const statusSelects = document.querySelectorAll('.status-select');
+    statusSelects.forEach(select => {
+        select.addEventListener('change', async function () {
+            const serviceId = this.getAttribute('data-id');
+            const newStatus = this.value;
+            const dot = document.getElementById(`dot-${serviceId}`);
+
+            const response = await fetch(`/update_status/${serviceId}`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ status: newStatus })
+            });
+
+            if (response.ok) {
+                if (newStatus === 'En proceso') {
+                    dot.style.backgroundColor = '#ffc107';
+                } else if (newStatus === 'Completado') {
+                    dot.style.backgroundColor = '#28a745';
+                } else {
+                    dot.style.backgroundColor = '#dc3545';
+                }
+            } else {
+                alert('Error al actualizar el estado.');
+            }
+        });
+    });
+</script>
+
+{% endblock %}
