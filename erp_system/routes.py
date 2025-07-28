@@ -117,6 +117,7 @@ def service_page():
     return render_template("service.html", title="Servicio", form=form)
 
 @app.route("/edit_service/<id>", methods=['GET', 'POST'])
+@login_required
 def edit_service_page(id):
     form = ServiceForm()
 
@@ -148,6 +149,7 @@ def edit_service_page(id):
 
 
 @app.route("/delete_service/<id>", methods=['POST'])
+@login_required
 def delete_service(id):
     service = Service.query.filter_by(id=id).first()
     if service:
@@ -164,6 +166,7 @@ def history_page():
     return render_template('history.html')
 
 @app.route('/api/history_data')
+@login_required
 def historial_data():
     periodo = request.args.get('periodo', 'semana')
     hoy = datetime.now()
@@ -190,10 +193,3 @@ def historial_data():
     valores = [fila.cantidad for fila in datos]
 
     return jsonify({'labels': etiquetas, 'data': valores})
-
-
-"""
-@app.route("/edit/<int:service_id>", methods=["GET", "POST"])
-@login_required
-def edit_service(service_id):
-"""
