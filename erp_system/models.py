@@ -3,6 +3,8 @@ from sqlalchemy import Enum
 from flask_login import UserMixin #methods for is_authenticated, etc.
 from datetime import datetime
 
+
+
 @login_manager.user_loader
 def load_user(user_id):
     return User.query.get(int(user_id))
@@ -15,6 +17,9 @@ class User(db.Model,UserMixin):
 
     def __repr__(self):
             return f"User('{self.username}', '{self.email}')"
+
+
+
 
 class Service(db.Model, UserMixin):
     id = db.Column(db.Integer, primary_key=True)
