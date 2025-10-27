@@ -19,8 +19,31 @@ app.config["SQLALCHEMY_DATABASE_URI"] = f"sqlite:///{db_path}"
 db = SQLAlchemy(app)
 bcrypt = Bcrypt(app)
 login_manager = LoginManager(app)
-login_manager.login_view = 'login_page'
+login_manager.login_view = 'login_bp.login_page'
 
 
 
-from erp_system import routes
+#from erp_system import routes
+#IMPORT BLUEPRINT INSTANCE OF HOME PAGE
+from erp_system.home.routes import home_bp
+app.register_blueprint(home_bp)
+
+
+#IMPORT BLUEPRINT INSTANCE OF LOGIN PAGE
+from erp_system.login.routes import login_bp
+app.register_blueprint(login_bp)
+
+#IMPORT BLUEPRINT INSTANCE OF REGISTER PAGE
+from erp_system.register.routes import register_bp
+app.register_blueprint(register_bp)
+
+
+
+#IMPORT BLUEPRINT INSTANCE OF SERVICE PAGE
+from erp_system.service.routes import service_bp
+app.register_blueprint(service_bp)
+
+
+#IMPORT BLUEPRINT INSTANCE OF HISTORY PAGE
+from erp_system.history.routes import history_bp
+app.register_blueprint(history_bp)

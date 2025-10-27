@@ -18,7 +18,7 @@ db.create_all()
 This will create db inside instances
 '''
 
-
+"""
 
 @app.route("/")
 @login_required
@@ -69,6 +69,7 @@ def logout():
     return(redirect(url_for('login_page')))
 
 
+
 @app.route("/login", methods=["GET","POST"])
 def login_page():
     if current_user.is_authenticated:
@@ -85,8 +86,8 @@ def login_page():
             flash('Inicio de sesion incorreco. Revisa el Usuario y Contraseña', 'danger')
 
     return render_template("login.html", title="Iniciar sesion", form=form)
-
-
+"""
+"""
 @app.route("/register", methods=["GET","POST"])
 def register_page():
     if current_user.is_authenticated:
@@ -160,6 +161,7 @@ def delete_service(id):
         flash('Servicio no encontrado.', 'danger')
     return redirect(url_for("home_page"))
 
+
 @app.route('/history')
 @login_required
 def history_page():
@@ -193,3 +195,4 @@ def historial_data():
     valores = [fila.cantidad for fila in datos]
 
     return jsonify({'labels': etiquetas, 'data': valores})
+"""

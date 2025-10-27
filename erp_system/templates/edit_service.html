@@ -7,7 +7,7 @@
     </div>
     <div class="card-body bg-white">
       <div class="d-flex justify-content-end">
-          <form method="POST" action="{{ url_for('delete_service', id=service.id) }}" onsubmit="return confirm('¿Estás seguro de que quieres eliminar este servicio?');">
+          <form method="POST" action="{{ url_for('service_bp.delete_service', id=service.id) }}" onsubmit="return confirm('¿Estás seguro de que quieres eliminar este servicio?');">
               <button type="submit" class="btn btn-outline-danger btn-sm">
                   🗑 Eliminar Servicio
               </button>

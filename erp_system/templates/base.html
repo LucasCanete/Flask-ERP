@@ -9,23 +9,52 @@
     <title>PortalPy</title>
     {% endif %}
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <style>
+     .navbar-custom {
+         background-color: #023047; /* tu color */
+     }
+     .navbar-custom .nav-link,
+     .navbar-custom .navbar-brand {
+         color: white !important;
+     }
+     .navbar-custom .nav-link:hover {
+         color: #ffb703 !important; /* color al pasar el mouse */
+     }
+   </style>
+     <style>
+    /* Aumentar duración del fade de los alerts a 1 segundo */
+    #flash-messages .alert {
+        transition: opacity 1s ease-out;
+        opacity: 1;
+    }
+
+    #flash-messages .alert.show {
+        opacity: 1;
+    }
+
+    #flash-messages .alert.fade:not(.show) {
+        opacity: 0;
+    }
+  </style>
+
 </head>
 <body class="bg-light">
 
-    <nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm px-3">
+    <nav class="navbar navbar-expand-lg navbar-custom shadow-sm px-3">
         <a class="navbar-brand" href="#">PortalPy</a>
 
         <div class="d-flex w-100">
-            <a class="nav-link d-inline" href="{{ url_for('home_page') }}">Inicio</a>
+            <a class="nav-link d-inline" href="{{ url_for('home_bp.home_page') }}">Inicio</a>
 
             <div class="ms-auto d-flex">
             {% if current_user.is_authenticated %}
-              <a class="nav-link me-3" href="{{ url_for('service_page') }}">Nuevo Servicio</a>
-              <a class="nav-link me-3" href="{{ url_for('history_page') }}">Historial</a>
-              <a class="nav-link" href="{{ url_for('logout') }}">Cerrar Sesion</a>
+              <a class="nav-link me-3" href="{{ url_for('service_bp.service_page') }}">Nuevo Servicio</a>
+              <a class="nav-link me-3" href="{{ url_for('history_bp.history_page') }}">Historial</a>
+              <a class="nav-link" href="{{ url_for('home_bp.logout') }}">Cerrar Sesion</a>
             {% else %}
-              <a class="nav-link me-3" href="{{ url_for('login_page') }}">Iniciar Sesion</a>
-              <a class="nav-link" href="{{ url_for('register_page') }}">Registrarme</a>
+              <a class="nav-link me-3" href="{{ url_for('login_bp.login_page') }}">Iniciar Sesion</a>
+              <a class="nav-link" href="{{ url_for('register_bp.register_page') }}">Registrarme</a>
             {% endif%}
             </div>
 
@@ -35,11 +64,11 @@
     <div class="container mt-4">
         {% with messages = get_flashed_messages(with_categories=True) %}
         {% if messages %}
-
-            {% for category, message in messages %}
-            <div class = "alert alert-{{ category }}">{{ message }}</div>
-            {% endfor %}
-
+          <div id="flash-messages">
+              {% for category, message in messages %}
+              <div class = "alert alert-{{ category }}">{{ message }}</div>
+              {% endfor %}
+          </div>
         {% endif %}
         {% endwith %}
 
@@ -47,5 +76,21 @@
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+      <script>
+      // Selecciona todos los alerts dentro de flash-messages
+        const alerts = document.querySelectorAll('#flash-messages .alert');
+
+        alerts.forEach(alert => {
+            // Espera 3 segundos
+            setTimeout(() => {
+                // Bootstrap fade out: quitar "show" hace que desaparezca suavemente
+                alert.classList.remove('show');
+
+                // Opcional: eliminar del DOM después de 500ms (duración del fade)
+                setTimeout(() => alert.remove(), 1000);
+            }, 3000);
+        });
+      </script>
 </body>
 </html>
