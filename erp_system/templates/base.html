@@ -50,11 +50,14 @@
 
   <div class="collapse navbar-collapse" id="navbarContent">
     <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
-      <li class="nav-item"><a class="nav-link" href="{{ url_for('home_bp.home_page') }}">Inicio</a></li>
+
       {% if current_user.is_authenticated %}
       <li class="nav-item"><a class="nav-link" href="{{ url_for('sale_bp.sale_page') }}">Ventas</a></li>
       <li class="nav-item"><a class="nav-link" href="{{ url_for('sale_bp.create_sale_page') }}">Nueva Venta</a></li>
-      <li class="nav-item"><a class="nav-link" href="{{ url_for('service_bp.service_page') }}">Nuevo Servicio</a></li>
+
+      <li class="nav-item"><a class="nav-link" href="{{ url_for('service_bp.services_page') }}">Servicios</a></li>
+      <li class="nav-item"><a class="nav-link" href="{{ url_for('service_bp.create_service_page') }}">Nuevo Servicio</a></li>
+
       <li class="nav-item"><a class="nav-link" href="{{ url_for('history_bp.history_page') }}">Historial</a></li>
       <li class="nav-item"><a class="nav-link" href="{{ url_for('home_bp.logout') }}">Cerrar Sesion</a></li>
       {% else %}
