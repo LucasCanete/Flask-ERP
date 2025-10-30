@@ -1,0 +1,77 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="card shadow-sm border-0">
+    <div class="card-header text-center border-0 bg-transparent">
+        <h2 class="mb-0">Registrar Nueva Venta</h2>
+    </div>
+    <div class="card-body bg-white">
+        <form method="POST" novalidate>
+            {{ form.hidden_tag() }}
+
+            <!-- Cliente -->
+            <div class="mb-3">
+                {{ form.customer.label(class="form-label") }}
+                {{ form.customer(class="form-select") }}
+                {% if form.customer.errors %}
+                    <div class="text-danger small mt-1">
+                        {{ form.customer.errors[0] }}
+                    </div>
+                {% endif %}
+            </div>
+
+            <!-- Producto -->
+            <div class="mb-3">
+                {{ form.product.label(class="form-label") }}
+                {{ form.product(class="form-control", placeholder="Nombre del producto") }}
+                {% if form.product.errors %}
+                    <div class="text-danger small mt-1">
+                        {{ form.product.errors[0] }}
+                    </div>
+                {% endif %}
+            </div>
+
+            <!-- Cantidad -->
+            <div class="mb-3">
+                {{ form.qty.label(class="form-label") }}
+                {{ form.qty(class="form-control", placeholder="Cantidad") }}
+                {% if form.qty.errors %}
+                    <div class="text-danger small mt-1">
+                        {{ form.qty.errors[0] }}
+                    </div>
+                {% endif %}
+            </div>
+
+            <!-- Precio pagado con decimales -->
+            <div class="mb-3">
+                {{ form.price_paid.label(class="form-label") }}
+                <div class="input-group">
+                    <span class="input-group-text">$</span>
+                    {{ form.price_paid(class="form-control", placeholder="Cantidad pagada", step="0.01") }}
+                </div>
+                {% if form.price_paid.errors %}
+                    <div class="text-danger small mt-1">
+                        {{ form.price_paid.errors[0] }}
+                    </div>
+                {% endif %}
+            </div>
+
+            <!-- Método de pago -->
+            <div class="mb-3">
+                {{ form.payment_method.label(class="form-label") }}
+                {{ form.payment_method(class="form-select") }}
+                {% if form.payment_method.errors %}
+                    <div class="text-danger small mt-1">
+                        {{ form.payment_method.errors[0] }}
+                    </div>
+                {% endif %}
+            </div>
+
+            <!-- Botón de enviar -->
+            <div class="d-grid">
+                {{ form.submit(class="btn btn-primary") }}
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock %}

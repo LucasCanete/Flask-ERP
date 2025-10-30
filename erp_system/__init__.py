@@ -33,10 +33,10 @@ app.register_blueprint(home_bp)
 from erp_system.login.routes import login_bp
 app.register_blueprint(login_bp)
 
+
 #IMPORT BLUEPRINT INSTANCE OF REGISTER PAGE
 from erp_system.register.routes import register_bp
 app.register_blueprint(register_bp)
-
 
 
 #IMPORT BLUEPRINT INSTANCE OF SERVICE PAGE
@@ -47,3 +47,7 @@ app.register_blueprint(service_bp)
 #IMPORT BLUEPRINT INSTANCE OF HISTORY PAGE
 from erp_system.history.routes import history_bp
 app.register_blueprint(history_bp)
+
+#IMPORT BLUEPRINT INSTANCE OF SALE PAGE
+from erp_system.sales.routes import sale_bp
+app.register_blueprint(sale_bp)
