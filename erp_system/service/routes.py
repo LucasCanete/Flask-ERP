@@ -5,6 +5,8 @@ from erp_system.models import Service
 from erp_system import db
 from datetime import datetime
 from collections import defaultdict
+from erp_system.utils.pdf import send_pdf_job
+
 
 
 service_bp = Blueprint('service_bp',__name__)
@@ -13,6 +15,8 @@ service_bp = Blueprint('service_bp',__name__)
 @service_bp.route("/")
 @login_required
 def services_page():
+    #send_pdf_job()
+
     status_filter = request.args.get("status")
     date_filter = request.args.get("date")
     services = Service.query

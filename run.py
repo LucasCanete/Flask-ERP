@@ -2,8 +2,20 @@ from erp_system import app
 
 import webbrowser
 import threading
-
 import socket
+
+
+
+
+
+#token = os.environ["bot_chat_id"]
+#id = os.environ["bot_token"]
+
+
+
+
+
+
 
 # Obtener IP local automáticamente
 def get_local_ip():

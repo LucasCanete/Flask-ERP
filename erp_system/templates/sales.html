@@ -53,7 +53,7 @@
                     <td>{{ sale.customer }}</td>
                     <td>{{ sale.product }}</td>
                     <td>{{ sale.qty }}</td>
-                    <td>${{ "%.2f"|format(sale.price_paid) }}</td>
+                    <td>${{ sale.price_paid | currency }}</td>
                     <td>{{ sale.payment_method }}</td>
                     <td>
                         {% if sale.datetime %}

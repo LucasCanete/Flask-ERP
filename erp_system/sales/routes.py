@@ -52,7 +52,7 @@ def create_sale_page():
             db.session.add(sale)
             db.session.commit()
             flash(f"Nueva venta ha sido creada!", "success")
-            return redirect(url_for('home_bp.home_page'))
+            return redirect(url_for('sale_bp.sale_page'))
     return render_template("create_sale.html", form=form)
 
 

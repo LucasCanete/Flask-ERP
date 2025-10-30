@@ -22,6 +22,11 @@ login_manager = LoginManager(app)
 login_manager.login_view = 'login_bp.login_page'
 
 
+#helper template that separates number every 3 digits
+@app.template_filter()
+def currency(value):
+    return f"{value:,}".replace(",", ".")
+
 
 #from erp_system import routes
 #IMPORT BLUEPRINT INSTANCE OF HOME PAGE
