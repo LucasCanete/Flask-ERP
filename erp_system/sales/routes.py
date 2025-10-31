@@ -4,6 +4,8 @@ from erp_system.models import Sale
 from erp_system.forms import SaleForm
 from flask_login import login_required
 from datetime import datetime, timedelta
+from collections import defaultdict
+
 
 sale_bp = Blueprint("sale_bp",__name__)
 
@@ -37,7 +39,16 @@ def sale_page():
 
     sales = sales.order_by(Sale.datetime.desc()).all()
 
-    return render_template("sales.html", sales=sales)
+    grouped = defaultdict(list)
+
+    for sale in sales:
+        day_str = sale.datetime.strftime("%d/%m/%Y")
+        grouped[day_str].append(sale)
+
+    # Convertir a lista de tuplas ordenada por fecha (reciente primero)
+    grouped_sales = sorted(grouped.items(), key=lambda x: datetime.strptime(x[0], "%d/%m/%Y"), reverse=True)
+
+    return render_template("sales.html", sales=sales, grouped_sales=grouped_sales)
 
 
 @sale_bp.route("/new_sale", methods = ['GET', 'POST'])
