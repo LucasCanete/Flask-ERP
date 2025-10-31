@@ -34,3 +34,8 @@ class ServiceForm(FlaskForm):
 
     comment = TextAreaField("Comentario", validators=[Optional(),Length(min=2,max=100)])
     submit = SubmitField("Guardar Servicio")
+
+
+class DownloadForm(FlaskForm):
+    chosen_date = StringField("Cliente", validators=[DataRequired(),Length(min=2,max=20)])
+    submit = SubmitField("Mostrar Reporte")

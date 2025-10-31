@@ -10,9 +10,8 @@ import requests
 import os
 from dotenv import load_dotenv
 
-def generate_pdf(pdf_name:str):
-    today = datetime.today()
-    start_datetime = today.date()
+def generate_pdf_for_date(date):
+    start_datetime = date
     end_datetime = start_datetime + timedelta(days=1)  # exclusivo
 
 
@@ -38,7 +37,7 @@ def generate_pdf(pdf_name:str):
                                 services=today_services, fecha_actual=datetime.now().strftime('%d/%m/%Y'),
                                 total_sales_price=total_sales_price)
     # html to pdf
-    pdf = HTML(string=html_content).write_pdf(pdf_name)
+    pdf = HTML(string=html_content).write_pdf()
     return pdf
 
 
@@ -47,16 +46,17 @@ def send_pdf_telegram(token, chat_id, file_path):
     with open(file_path, "rb") as pdf:
         requests.post(url, data={"chat_id": chat_id}, files={"document": pdf})
 
-
+"""
 def send_pdf_job():
     today = datetime.today()
     t = today.strftime('%d-%m-%Y')
     report_name = "reporte_" + t +".pdf"
 
     generate_pdf(report_name)
-    
+
     pdf_path = '/home/lucas/Documents/portalpy/erp/' + report_name
     id = os.getenv("BOT_CHAT_ID")
     token = os.getenv("BOT_TOKEN")
 
     send_pdf_telegram(token=token, chat_id=id, file_path=pdf_path)
+"""

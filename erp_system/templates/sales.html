@@ -3,6 +3,39 @@
 
 <h2 class="text-center mb-4">Ventas Registradas</h2>
 
+<style>
+    /* Evita que los nombres largos deformen la tabla */
+    table {
+        table-layout: fixed;
+        width: 100%;
+    }
+
+    th, td {
+        text-align: center;
+        vertical-align: middle;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+
+    /* Permitir que solo la columna de producto se expanda un poco más */
+    td:nth-child(2), th:nth-child(2) {
+        white-space: normal;        /* permite salto de línea */
+        word-wrap: break-word;      /* divide nombres largos */
+        max-width: 200px;           /* evita que se haga gigante */
+    }
+
+    /* Ajusta la alineación general */
+    tbody tr td {
+        vertical-align: middle;
+    }
+
+    /* Opcional: mejora visual del hover */
+    tbody tr:hover {
+        background-color: #f9f9f9;
+    }
+</style>
+
 <!-- FILTRO -->
 <form method="get" class="mb-3 row g-2">
     <div class="col-12 col-md-4">
@@ -49,7 +82,7 @@
             </tr>
         </thead>
         <tbody>
-            {% if sales %}
+            {% if sales_by_day %}
                 {% for sale in sales_by_day %}
                 <tr>
                     <td>{{ sale.customer }}</td>
@@ -65,7 +98,7 @@
                         {% endif %}
                     </td>
                     <td>
-                           <a href="{{ url_for('sale_bp.edit_sale_page', id = sale.id) }}" class="btn btn-sm btn-primary">Editar</a>
+                        <a href="{{ url_for('sale_bp.edit_sale_page', id = sale.id) }}" class="btn btn-sm btn-primary">Editar</a>
                     </td>
                 </tr>
                 {% endfor %}

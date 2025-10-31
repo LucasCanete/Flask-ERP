@@ -56,3 +56,7 @@ app.register_blueprint(history_bp)
 #IMPORT BLUEPRINT INSTANCE OF SALE PAGE
 from erp_system.sales.routes import sale_bp
 app.register_blueprint(sale_bp)
+
+#IMPORT BLUEPRINT INSTANCE OF SALE PAGE
+from erp_system.download.routes import download_bp
+app.register_blueprint(download_bp)
