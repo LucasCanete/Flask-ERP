@@ -3,6 +3,7 @@ Generate a pdf from an html file
 """
 from flask import render_template, current_app
 from weasyprint import HTML
+from erp_system import app
 from erp_system.models import Service
 from erp_system.models import Sale
 from datetime import datetime, timedelta
@@ -46,17 +47,33 @@ def send_pdf_telegram(token, chat_id, file_path):
     with open(file_path, "rb") as pdf:
         requests.post(url, data={"chat_id": chat_id}, files={"document": pdf})
 
-"""
-def send_pdf_job():
-    today = datetime.today()
-    t = today.strftime('%d-%m-%Y')
-    report_name = "reporte_" + t +".pdf"
 
-    generate_pdf(report_name)
+def save_pdf_locally():
+    try:
+        with app.app_context():
+             today = datetime.now().date() #replace(hour=0, minute=0, second=0, microsecond=0)
+             pdf_binary = generate_pdf_for_date(today)
 
-    pdf_path = '/home/lucas/Documents/portalpy/erp/' + report_name
-    id = os.getenv("BOT_CHAT_ID")
-    token = os.getenv("BOT_TOKEN")
+             output_dir = os.path.join(current_app.root_path, "reports")
+             file_path = os.path.join(output_dir,f"reporte_{today.strftime('%d-%m-%Y')}.pdf")
 
-    send_pdf_telegram(token=token, chat_id=id, file_path=pdf_path)
-"""
+             with open(file_path, "wb") as f:
+                 f.write(pdf_binary)
+
+             return file_path
+
+    except Exception as e:
+        print(f"Unable to save pdf locally: {e}")
+        return []
+
+def send_pdf_daily_job():
+    pdf_path = save_pdf_locally()
+
+    if pdf_path:
+        load_dotenv()
+        t = os.getenv("TOKEN")
+        id = os.getenv("CHAT_ID")
+        send_pdf_telegram(token=t, chat_id=id, file_path=pdf_path)
+        print("PDF Report succesfully sent!")
+
+        os.remove(pdf_path)

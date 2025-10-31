@@ -1,20 +1,8 @@
 from erp_system import app
-
+from erp_system.utils.scheduler import start_scheduler
 import webbrowser
 import threading
 import socket
-
-
-
-
-
-#token = os.environ["bot_chat_id"]
-#id = os.environ["bot_token"]
-
-
-
-
-
 
 
 # Obtener IP local automáticamente
@@ -37,4 +25,6 @@ def open_browser():
 
 if __name__ == '__main__':
     threading.Timer(1.0, open_browser).start()
+    with app.app_context():
+        start_scheduler()
     app.run(host="0.0.0.0", port=5000)

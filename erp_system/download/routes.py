@@ -1,5 +1,5 @@
 from flask import Blueprint, make_response, render_template
-from erp_system.utils.pdf import generate_pdf_for_date
+from erp_system.utils.reports import generate_pdf_for_date
 from erp_system.forms import DownloadForm
 from datetime import datetime
 
