@@ -3,6 +3,50 @@
 
 <h2 class="text-center mb-4">Servicios Registrados</h2>
 
+<style>
+    /* --- TABLA FIJA Y ALINEADA --- */
+    table {
+        table-layout: fixed;
+        width: 100%;
+    }
+
+    th, td {
+        text-align: center;
+        vertical-align: middle;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+
+    /* --- Columnas que pueden tener texto largo --- */
+    td:nth-child(3), th:nth-child(3),  /* Cliente */
+    td:nth-child(4), th:nth-child(4),  /* Dirección */
+    td:nth-child(5), th:nth-child(5) { /* Teléfono */
+        white-space: normal;
+        word-wrap: break-word;
+        max-width: 200px;
+    }
+
+    /* --- Ajustes visuales generales --- */
+    tbody tr td {
+        vertical-align: middle;
+    }
+
+    tbody tr:hover {
+        background-color: #f9f9f9;
+    }
+
+    .status-select {
+        min-width: 120px;
+    }
+
+    /* Evita que el puntito de color o el select salten de línea */
+    .d-flex.flex-wrap {
+        flex-wrap: nowrap !important;
+        justify-content: center;
+    }
+</style>
+
 <form method="get" class="mb-3 row g-2">
     <div class="col-12 col-md-6">
         <select name="status" class="form-select">
@@ -13,9 +57,9 @@
         </select>
     </div>
 
-      <div class="col-6 col-md-3">
-          <input type="date" name="date" class="form-control" lang="es">
-      </div>
+    <div class="col-6 col-md-3">
+        <input type="date" name="date" class="form-control" lang="es">
+    </div>
 
     <div class="col-12 col-md-auto">
         <button type="submit" class="btn btn-outline-primary w-100">Filtrar</button>
