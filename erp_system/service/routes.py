@@ -5,7 +5,7 @@ from erp_system.models import Service
 from erp_system import db
 from datetime import datetime
 from collections import defaultdict
-from erp_system.utils.pdf import send_pdf_job
+
 
 
 
