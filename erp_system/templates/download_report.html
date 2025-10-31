@@ -1,0 +1,21 @@
+<!-- templates/download_report.html -->
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container mt-5">
+    <h2 class="text-center mb-4">Descargar Reporte de Ventas y Servicios</h2>
+
+    <form method="POST" action="{{ url_for('download_bp.download_page') }}" class="row g-3 justify-content-center">
+        {{ form.hidden_tag() }}
+
+        <div class="col-auto">
+            {{ form.chosen_date.label(class="form-label") }}
+            {{ form.chosen_date(class="form-control", type="date", value=form.chosen_date.data or default_date) }}
+        </div>
+
+        <div class="col-auto align-self-end">
+            {{ form.submit(class="btn btn-primary") }}
+        </div>
+    </form>
+</div>
+{% endblock %}
