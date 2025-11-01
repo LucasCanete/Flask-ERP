@@ -1,0 +1,61 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="container mt-5">
+    <h2 class="text-center mb-4">🔌 Conexión Wi-Fi</h2>
+
+    {% if networks %}
+    <div class="card shadow-sm mb-4">
+        <div class="card-header bg-primary text-white">
+            Redes detectadas
+        </div>
+        <ul class="list-group list-group-flush">
+            {% for ssid, signal in networks %}
+            <li class="list-group-item d-flex justify-content-between align-items-center">
+                <span>{{ ssid }}</span>
+                <span class="badge bg-secondary">{{ signal }}%</span>
+                <button type="button" class="btn btn-outline-primary btn-sm"
+                        onclick="document.getElementById('ssid').value='{{ ssid }}'; window.scrollTo(0,document.body.scrollHeight);">
+                    Usar
+                </button>
+            </li>
+            {% endfor %}
+        </ul>
+    </div>
+    {% else %}
+    <div class="alert alert-warning text-center">
+        No se detectaron redes Wi-Fi. <br>
+        <small>Actualiza la página para volver a escanear.</small>
+    </div>
+    {% endif %}
+
+    <div class="card shadow-sm">
+        <div class="card-header bg-success text-white">
+            Conectar manualmente
+        </div>
+        <div class="card-body">
+            <form method="POST">
+                {{ form.hidden_tag() }}
+                <div class="mb-3">
+                    {{ form.ssid.label(class="form-label") }}
+                    {{ form.ssid(class="form-control", id="ssid", placeholder="Ej: MiRedWiFi") }}
+                </div>
+                <div class="mb-3">
+                    {{ form.password.label(class="form-label") }}
+                    {{ form.password(class="form-control", placeholder="Contraseña") }}
+                </div>
+                <div class="text-center">
+                    {{ form.submit(class="btn btn-success px-4") }}
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<style>
+    .card { border-radius: 1rem; }
+    .btn-outline-primary:hover {
+        background-color: #0d6efd;
+        color: white;
+    }
+</style>
+{% endblock %}

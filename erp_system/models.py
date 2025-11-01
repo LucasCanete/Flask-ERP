@@ -18,8 +18,14 @@ class User(db.Model,UserMixin):
     def __repr__(self):
             return f"User('{self.username}', '{self.email}')"
 
-
-
+class Sale(db.Model, UserMixin):
+    id = db.Column(db.Integer, primary_key=True)
+    datetime = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
+    customer = db.Column(db.String(20), nullable=False)
+    product = db.Column(db.String(30), nullable=False)
+    qty = db.Column(db.Integer, nullable=False)
+    price_paid = db.Column(db.Integer, nullable=False)
+    payment_method = db.Column(db.String(20), nullable=False)
 
 class Service(db.Model, UserMixin):
     id = db.Column(db.Integer, primary_key=True)
