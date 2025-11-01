@@ -58,6 +58,7 @@ def update_status(service_id):
     service = Service.query.get_or_404(service_id)
     service.status = new_status
     db.session.commit()
+    flash(f'Estado del servicio actualizado!','success')
 
     return jsonify({'success': True, 'new_status': new_status}), 200
 

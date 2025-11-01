@@ -16,6 +16,7 @@ class RegisterForm(FlaskForm):
     confirm_password = PasswordField("Confirmar Contraseña", validators=[DataRequired(),EqualTo('password')])
     submit = SubmitField("Crear Cuenta")
 
+
 class SaleForm(FlaskForm):
     customer = SelectField("Cliente", choices = ["Consumidor","Instalador"], validators=[DataRequired(),Length(min=2,max=20)])
     product = StringField("Producto", validators=[DataRequired(),Length(min=2,max=30)])
@@ -24,6 +25,7 @@ class SaleForm(FlaskForm):
     payment_method = SelectField("Metodo de Pago", choices = ["Efectivo","Transferencia", "Tarjeta","Pagare"], validators=[DataRequired(),Length(min=2,max=10)])
 
     submit = SubmitField("Crear Venta")
+
 
 class ServiceForm(FlaskForm):
     type = StringField("Tipo de Servicio", validators=[DataRequired(),Length(min=2,max=20)])
@@ -39,3 +41,9 @@ class ServiceForm(FlaskForm):
 class DownloadForm(FlaskForm):
     chosen_date = StringField("Cliente", validators=[DataRequired(),Length(min=2,max=20)])
     submit = SubmitField("Mostrar Reporte")
+
+
+class ConnectToWiFiForm(FlaskForm):
+    ssid = StringField("Red", validators=[DataRequired(),Length(min=2,max=20)])
+    password = PasswordField("Contraseña",validators=[DataRequired()])
+    submit = SubmitField("Conectar")
