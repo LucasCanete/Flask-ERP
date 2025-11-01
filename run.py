@@ -21,7 +21,7 @@ def get_local_ip():
 # Abre el navegador en la IP local
 def open_browser():
     local_ip = get_local_ip()
-    webbrowser.open(f"http://{local_ip}:5000")
+    webbrowser.open(f"http://{local_ip}:5000/services/services_view")
 
 if __name__ == '__main__':
     threading.Timer(1.0, open_browser).start()

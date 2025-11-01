@@ -12,7 +12,7 @@ from collections import defaultdict
 service_bp = Blueprint('service_bp',__name__)
 
 
-@service_bp.route("/")
+@service_bp.route("/services_view")
 @login_required
 def services_page():
     #send_pdf_job()
@@ -63,7 +63,7 @@ def update_status(service_id):
     return jsonify({'success': True, 'new_status': new_status}), 200
 
 
-@service_bp.route("/service", methods=["GET","POST"])
+@service_bp.route("/new_service", methods=["GET","POST"])
 @login_required
 def create_service_page():
     form = ServiceForm()

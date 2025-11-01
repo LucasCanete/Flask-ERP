@@ -9,14 +9,8 @@ from collections import defaultdict
 
 sale_bp = Blueprint("sale_bp",__name__)
 
-"""
-@sale_bp.route("/sales")
-def sales_page():
 
-
-    return render_template()
-"""
-@sale_bp.route("/sales", methods = ['GET', 'POST'])
+@sale_bp.route("/sales_view", methods = ['GET', 'POST'])
 @login_required
 def sale_page():
     customer_filter = request.args.get("customer")
