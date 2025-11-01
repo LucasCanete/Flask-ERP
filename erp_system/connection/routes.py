@@ -20,6 +20,7 @@ def connection_page():
 
         else:
             flash('No pudo conectarse a la red. Revisa el SSID y Contraseña', 'danger')
+            return redirect(url_for("connection_bp.connection_page"))
 
 
     return render_template("connection.html", form=form, networks = found_networks)
