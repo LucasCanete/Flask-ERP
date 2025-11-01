@@ -47,17 +47,17 @@ app.register_blueprint(register_bp)
 
 #IMPORT BLUEPRINT INSTANCE OF SERVICE PAGE
 from erp_system.service.routes import service_bp
-app.register_blueprint(service_bp)
+app.register_blueprint(service_bp, url_prefix='/services')
+
+
+#IMPORT BLUEPRINT INSTANCE OF SALE PAGE
+from erp_system.sales.routes import sale_bp
+app.register_blueprint(sale_bp, url_prefix='/sales')
 
 
 #IMPORT BLUEPRINT INSTANCE OF HISTORY PAGE
 from erp_system.history.routes import history_bp
 app.register_blueprint(history_bp)
-
-
-#IMPORT BLUEPRINT INSTANCE OF SALE PAGE
-from erp_system.sales.routes import sale_bp
-app.register_blueprint(sale_bp)
 
 
 #IMPORT BLUEPRINT INSTANCE OF DOWNLOAD PAGE
