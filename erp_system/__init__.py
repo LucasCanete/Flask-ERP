@@ -1,9 +1,10 @@
-from flask import Flask
+from flask import Flask, redirect, url_for
 from flask_bcrypt import Bcrypt
 from flask_sqlalchemy import SQLAlchemy
 from flask_login import LoginManager
 from flask_mail import Mail
 from flask import request
+from erp_system.utils.wifi import is_connected
 import os
 
 
@@ -53,10 +54,25 @@ app.register_blueprint(service_bp)
 from erp_system.history.routes import history_bp
 app.register_blueprint(history_bp)
 
+
 #IMPORT BLUEPRINT INSTANCE OF SALE PAGE
 from erp_system.sales.routes import sale_bp
 app.register_blueprint(sale_bp)
 
-#IMPORT BLUEPRINT INSTANCE OF SALE PAGE
+
+#IMPORT BLUEPRINT INSTANCE OF DOWNLOAD PAGE
 from erp_system.download.routes import download_bp
 app.register_blueprint(download_bp)
+
+
+#IMPORT BLUEPRINT INSTANCE OF DOWNLOAD PAGE
+from erp_system.connection.routes import connection_bp
+app.register_blueprint(connection_bp)
+
+
+#redirect automatically to connection page if it is not connected or another page is trying to be accesed
+@app.before_request
+def check_wifi_connection():
+    # Evitar bucle infinito si ya estamos en la página de conexión
+    if request.endpoint != "connection_bp.connection_page" and not is_connected():
+        return redirect(url_for("connection_bp.connection_page"))
