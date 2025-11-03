@@ -20,7 +20,7 @@ class User(db.Model,UserMixin):
 
 class Sale(db.Model, UserMixin):
     id = db.Column(db.Integer, primary_key=True)
-    datetime = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
+    datetime = db.Column(db.DateTime, nullable=False, default=datetime.now)
     customer = db.Column(db.String(20), nullable=False)
     product = db.Column(db.String(30), nullable=False)
     qty = db.Column(db.Integer, nullable=False)
@@ -29,8 +29,8 @@ class Sale(db.Model, UserMixin):
 
 class Service(db.Model, UserMixin):
     id = db.Column(db.Integer, primary_key=True)
-    datetime = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
-    type = db.Column(db.String(20), nullable=False)
+    datetime = db.Column(db.DateTime, nullable=False, default=datetime.now)
+    type = db.Column(db.String(30), nullable=False)
     client_name = db.Column(db.String(20), nullable=False)
     client_address = db.Column(db.String(30), nullable=False)
     client_phone = db.Column(db.String(20), nullable=False)

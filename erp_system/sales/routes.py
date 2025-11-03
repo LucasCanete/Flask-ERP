@@ -70,7 +70,7 @@ def edit_sale_page(id):
     sale = Sale.query.filter_by(id=id).first()
     if not sale:
         flash("Venta no encontrada.", "danger")
-        return redirect(url_for("home_bp.home_page"))
+        return redirect(url_for("sale_bp.sale_page"))
 
     #Prefill the form with the values from the service
     if request.method == 'GET':
