@@ -58,7 +58,7 @@ def update_status(service_id):
     service = Service.query.get_or_404(service_id)
     service.status = new_status
     db.session.commit()
-    flash(f'Estado del servicio actualizado!','success')
+    #flash(f'Estado del servicio actualizado!','success')
 
     return jsonify({'success': True, 'new_status': new_status}), 200
 
@@ -88,7 +88,7 @@ def edit_service_page(id):
 
     if not service:
         flash("Servicio no encontrado.", "danger")
-        return redirect(url_for("home_bp.home_page"))
+        return redirect(url_for("service_bp.services_page"))
 
     #Prefill the form with the values from the service
     if request.method == 'GET':

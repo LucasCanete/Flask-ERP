@@ -22,13 +22,13 @@ class SaleForm(FlaskForm):
     product = StringField("Producto", validators=[DataRequired(),Length(min=2,max=30)])
     qty = IntegerField(validators=[DataRequired()])
     price_paid = IntegerField(validators=[DataRequired()])
-    payment_method = SelectField("Metodo de Pago", choices = ["Efectivo","Transferencia", "Tarjeta","Pagare"], validators=[DataRequired(),Length(min=2,max=10)])
+    payment_method = SelectField("Metodo de Pago", choices = ["Efectivo","Transferencia", "Tarjeta","Pagare"], validators=[DataRequired(),Length(min=2,max=15)])
 
     submit = SubmitField("Crear Venta")
 
 
 class ServiceForm(FlaskForm):
-    type = StringField("Tipo de Servicio", validators=[DataRequired(),Length(min=2,max=20)])
+    type = StringField("Tipo de Servicio", validators=[DataRequired(),Length(min=2,max=30)])
 
     client_name = StringField("Cliente", validators=[DataRequired(),Length(min=2,max=20)])
     client_address = StringField("Direccion", validators=[Optional(),Length(min=2,max=50)])

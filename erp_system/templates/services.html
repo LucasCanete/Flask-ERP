@@ -121,7 +121,7 @@
             const newStatus = this.value;
             const dot = document.getElementById(`dot-${serviceId}`);
 
-            const response = await fetch(`/update_status/${serviceId}`, {
+            const response = await fetch(`/services/update_status/${serviceId}`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'

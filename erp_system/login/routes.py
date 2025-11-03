@@ -9,7 +9,7 @@ login_bp = Blueprint('login_bp',__name__)
 @login_bp.route("/login", methods=["GET","POST"])
 def login_page():
     if current_user.is_authenticated:
-        return redirect(url_for('home_bp.home_page'))
+        return redirect(url_for('service_bp.services_page'))
     form = LoginForm()
     if form.validate_on_submit():
         user = User.query.filter_by(username=form.username.data).first()
@@ -17,7 +17,7 @@ def login_page():
         if user and bcrypt.check_password_hash(user.password, form.password.data):
             login_user(user,remember=form.remember_me.data)
             next_page = request.args.get('next')
-            return redirect(next_page) if next_page else redirect(url_for("home_bp.home_page"))
+            return redirect(next_page) if next_page else redirect(url_for("service_bp.services_page"))
         else:
             flash('Inicio de sesion incorrecto. Revisa el Usuario y Contraseña', 'danger')
 
