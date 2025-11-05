@@ -4,35 +4,90 @@
 <h2 class="text-center mb-4">Ventas Registradas</h2>
 
 <style>
-    /* Evita que los nombres largos deformen la tabla */
+    /* --- ESTILOS DE TABLA --- */
+    .table-responsive {
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+    }
+
     table {
-        table-layout: fixed;
         width: 100%;
+        border-collapse: collapse;
     }
 
     th, td {
-        text-align: center;
         vertical-align: middle;
-        white-space: nowrap;
-        overflow: hidden;
-        text-overflow: ellipsis;
+        padding: 8px 10px;
+        font-size: 0.9rem;
+        white-space: normal;
+        word-wrap: break-word;
     }
 
-    /* Permitir que solo la columna de producto se expanda un poco más */
-    td:nth-child(2), th:nth-child(2) {
-        white-space: normal;        /* permite salto de línea */
-        word-wrap: break-word;      /* divide nombres largos */
-        max-width: 200px;           /* evita que se haga gigante */
+    /* Alineación coherente por columna */
+    th:nth-child(1), td:nth-child(1) { text-align: left; }   /* Cliente */
+    th:nth-child(2), td:nth-child(2) { text-align: left; }   /* Producto */
+    th:nth-child(3), td:nth-child(3) { text-align: center; } /* Cantidad */
+    th:nth-child(4), td:nth-child(4) { text-align: right; }  /* Pagado */
+    th:nth-child(5), td:nth-child(5) { text-align: center; } /* Método de Pago */
+    th:nth-child(6), td:nth-child(6) { text-align: center; } /* Fecha */
+    th:nth-child(7), td:nth-child(7) { text-align: center; } /* Acción */
+
+    thead th {
+        background-color: #f8f9fa;
+        font-weight: 600;
     }
 
-    /* Ajusta la alineación general */
-    tbody tr td {
-        vertical-align: middle;
-    }
-
-    /* Opcional: mejora visual del hover */
     tbody tr:hover {
         background-color: #f9f9f9;
+    }
+
+    /* --- MEJORAS PARA MÓVIL --- */
+    @media (max-width: 768px) {
+        table {
+            font-size: 0.85rem;
+        }
+
+        th, td {
+            padding: 6px 8px;
+        }
+
+        /* Convierte la tabla en tarjetas verticales */
+        .table thead {
+            display: none;
+        }
+
+        .table tbody tr {
+            display: block;
+            margin-bottom: 1rem;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            background: #fff;
+            padding: 8px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+        }
+
+        .table tbody td {
+            display: flex;
+            justify-content: space-between;
+            text-align: right;
+            border-bottom: 1px dashed #eee;
+        }
+
+        .table tbody td:last-child {
+            border-bottom: none;
+        }
+
+        .table tbody td::before {
+            content: attr(data-label);
+            font-weight: 600;
+            text-align: left;
+            flex-basis: 50%;
+        }
+
+        .btn-sm {
+            font-size: 0.8rem;
+            padding: 4px 8px;
+        }
     }
 </style>
 
@@ -67,10 +122,10 @@
 
 {% for day, sales_by_day in grouped_sales %}
 <h4 class="mt-5 mb-3 text-primary border-bottom pb-1">{{ day }}</h4>
-<!-- TABLA DE VENTAS -->
+
 <div class="table-responsive">
     <table class="table table-hover bg-white shadow-sm rounded">
-        <thead class="table-light">
+        <thead>
             <tr>
                 <th>Cliente</th>
                 <th>Producto</th>
@@ -85,20 +140,20 @@
             {% if sales_by_day %}
                 {% for sale in sales_by_day %}
                 <tr>
-                    <td>{{ sale.customer }}</td>
-                    <td>{{ sale.product }}</td>
-                    <td>{{ sale.qty }}</td>
-                    <td>${{ sale.price_paid | currency }}</td>
-                    <td>{{ sale.payment_method }}</td>
-                    <td>
+                    <td data-label="Cliente">{{ sale.customer }}</td>
+                    <td data-label="Producto">{{ sale.product }}</td>
+                    <td data-label="Cantidad">{{ sale.qty }}</td>
+                    <td data-label="Pagado">${{ sale.price_paid | currency }}</td>
+                    <td data-label="Método de Pago">{{ sale.payment_method }}</td>
+                    <td data-label="Fecha">
                         {% if sale.datetime %}
                             {{ sale.datetime.strftime("%d/%m/%Y %H:%M") }}
                         {% else %}
                             -
                         {% endif %}
                     </td>
-                    <td>
-                        <a href="{{ url_for('sale_bp.edit_sale_page', id = sale.id) }}" class="btn btn-sm btn-primary">Editar</a>
+                    <td data-label="Acción">
+                        <a href="{{ url_for('sale_bp.edit_sale_page', id=sale.id) }}" class="btn btn-sm btn-primary">Editar</a>
                     </td>
                 </tr>
                 {% endfor %}
