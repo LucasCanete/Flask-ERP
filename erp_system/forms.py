@@ -39,7 +39,7 @@ class ServiceForm(FlaskForm):
 
 
 class DownloadForm(FlaskForm):
-    chosen_date = StringField("Cliente", validators=[DataRequired(),Length(min=2,max=20)])
+    chosen_date = StringField("Fecha", validators=[DataRequired(),Length(min=2,max=20)])
     submit = SubmitField("Mostrar Reporte")
 
 
