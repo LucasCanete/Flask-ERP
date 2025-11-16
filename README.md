@@ -98,16 +98,18 @@ sudo systemctl restart erp.service
 ```
 
 ## How To Use
-Bla bla bla
+Once the rapsberry pi is on and with the erp service running go to browser and type:
+```
+http://portalpy.local:8000/login
+```
+You will will directed to the login page where you can register or login directly
 
-### Send Els as Email
-bla bla bla
 
 ## Project Status
 This project is still under development. Some things that still need to be done:
 
-- [x] something
-- [x] 
+- [] Test automatic sending of reports at 18 
+- [] Test the pi in an environment where the wlan is not known
 
 
 ## Q&A
