@@ -108,7 +108,8 @@ You will will directed to the login page where you can register or login directl
 ## Project Status
 This project is still under development. Some things that still need to be done:
 
-- [] Test automatic sending of reports at 18 
+- [x] Test automatic sending of reports at 18:
+  Failed. Gunicorn does not run run.py therefore it never starts the scheduler. Move the scheduler to a different file.
 - [] Test the pi in an environment where the wlan is not known
 
 
