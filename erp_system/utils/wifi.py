@@ -4,8 +4,9 @@ import subprocess
 def is_connected():
     try:
         # Revisa si hay conexión real a internet
+        #-W 3 define 3 segundos como el timeout
         result = subprocess.run(
-            ["ping", "-c", "1", "-W", "1", "8.8.8.8"],
+            ["ping", "-c", "1", "-W", "3", "8.8.8.8"],
             stdout=subprocess.DEVNULL,
             stderr=subprocess.DEVNULL
         )
@@ -34,7 +35,7 @@ def list_networks():
 def connect_to_network(ssid, password):
     print(f"\n🔗 Conectando a '{ssid}'...")
     result = subprocess.run(
-        ["nmcli", "dev", "wifi", "connect", ssid, "password", password],
+        ["/usr/bin/nmcli", "dev", "wifi", "connect", ssid, "password", password],
         capture_output=True,
         text=True
     )
