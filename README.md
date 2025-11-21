@@ -96,13 +96,23 @@ Restart the service:
 ```
 sudo systemctl restart erp.service
 ```
+### Activate automatic report sender with cron:
+On the terminal open cron:
+```
+crontab -e
+```
+Once opened program the file "cron_task.py" to run from monday to saturdaya ay 18. Put this in the cron list:
+```
+0 18 * * 1-6 cd /home/admin/ERP/Flask-ERP && /home/admin/ERP/Flask-ERP/venv/bin/python cron_task.py >> /home/admin/ERP/Flask-ERP/cron.log 2>&1
+```
+Once done you should receive the report on your telegram at 18!
 
 ## How To Use
 Once the rapsberry pi is on and with the erp service running go to browser and type:
 ```
-http://portalpy.local:8000/login
+http://portalpy.local:8000/services/services_view
 ```
-You will will directed to the login page where you can register or login directly
+You will will directed to the services page. If you are not logged in you will be redirected to the login page first
 
 
 ## Project Status
@@ -110,7 +120,7 @@ This project is still under development. Some things that still need to be done:
 
 - [x] Test automatic sending of reports at 18:
   Failed. Gunicorn does not run run.py therefore it never starts the scheduler. Move the scheduler to a different file.
-- [] Test the pi in an environment where the wlan is not known
+- [ ] Test the pi in an environment where the wlan is not known
 
 
 ## Q&A
