@@ -1,0 +1,18 @@
+WARNING:weasyprint:Ignored `box-shadow: 0 0 5px rgba(0,0,0,0.1)` at 41:13, unknown property.
+DEBUG:PIL.TiffImagePlugin:tag: ExifIFD (34665) - type: long (4) - value: b'\x1a\x00\x00\x00'
+DEBUG:urllib3.connectionpool:Starting new HTTPS connection (1): api.telegram.org:443
+DEBUG:urllib3.connectionpool:https://api.telegram.org:443 "POST /bot8498765980:AAFIVYAHIyHfNj3bV3Xa6dFP1vQjrhhVfew/sendDocument HTTP/1.1" 200 462
+INFO:root:📨 PDF has been sent to telegram
+PDF Report succesfully sent!
+WARNING:weasyprint:Ignored `box-shadow: 0 0 5px rgba(0,0,0,0.1)` at 41:13, unknown property.
+DEBUG:PIL.TiffImagePlugin:tag: ExifIFD (34665) - type: long (4) - value: b'\x1a\x00\x00\x00'
+DEBUG:urllib3.connectionpool:Starting new HTTPS connection (1): api.telegram.org:443
+DEBUG:urllib3.connectionpool:https://api.telegram.org:443 "POST /bot8498765980:AAFIVYAHIyHfNj3bV3Xa6dFP1vQjrhhVfew/sendDocument HTTP/1.1" 200 462
+INFO:root:📨 PDF has been sent to telegram
+PDF Report succesfully sent!
+WARNING:weasyprint:Ignored `box-shadow: 0 0 5px rgba(0,0,0,0.1)` at 41:13, unknown property.
+DEBUG:PIL.TiffImagePlugin:tag: ExifIFD (34665) - type: long (4) - value: b'\x1a\x00\x00\x00'
+DEBUG:urllib3.connectionpool:Starting new HTTPS connection (1): api.telegram.org:443
+DEBUG:urllib3.connectionpool:https://api.telegram.org:443 "POST /bot8498765980:AAFIVYAHIyHfNj3bV3Xa6dFP1vQjrhhVfew/sendDocument HTTP/1.1" 200 462
+INFO:root:📨 PDF has been sent to telegram
+PDF Report succesfully sent!
